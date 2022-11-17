@@ -1,5 +1,6 @@
 package com.miempresa.serviciowebv4
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.StrictMode
@@ -29,20 +30,22 @@ class MainActivity : AppCompatActivity() {
             val usuario = txtUsuario.text.toString()
             val clave = txtClave.text.toString()
             val queue = Volley.newRequestQueue(this)
-            var url = "http://192.168.0.105:3000/usuarios?"
+            var url = getString(R.string.urlAPI)+"/usuarios?"
             url = url + "usuario="+usuario+"&clave="+clave
             Log.e("gg", "${usuario} y ${clave}")
             val stringRequest = JsonArrayRequest(url,
                 Response.Listener { response ->
                     try {
                         val valor = response.getJSONObject(0)
-                        Toast.makeText(
+                        /*Toast.makeText(
                             applicationContext,
                             "Validación de usuario: "+valor.getString("usuario")+
                                     " con clave: "+valor.getString("clave")+" correcta",
                             Toast.LENGTH_LONG
-                        ).show()
-
+                        ).show()*/
+                        val llamarActividad = Intent(applicationContext, listadoPeliculas::class.java)
+                        startActivity(llamarActividad)
+                        finish()
                     }catch (e: JSONException){
                         Toast.makeText(applicationContext,
                         "Error en las credenciales proporcionadas",
