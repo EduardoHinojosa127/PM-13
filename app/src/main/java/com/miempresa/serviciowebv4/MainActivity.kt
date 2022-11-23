@@ -43,9 +43,8 @@ class MainActivity : AppCompatActivity() {
                                     " con clave: "+valor.getString("clave")+" correcta",
                             Toast.LENGTH_LONG
                         ).show()*/
-                        val llamarActividad = Intent(applicationContext, listadoPeliculas::class.java)
+                        val llamarActividad = Intent(applicationContext, Opciones::class.java)
                         startActivity(llamarActividad)
-                        finish()
                     }catch (e: JSONException){
                         Toast.makeText(applicationContext,
                         "Error en las credenciales proporcionadas",

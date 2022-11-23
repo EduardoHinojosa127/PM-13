@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:gravity="center_vertical">
         <Button
-            android:id="@+id/btnSalirPelicula"
+            android:id="@+id/btnSalirUsuario"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="salir"
@@ -22,7 +22,7 @@
             android:gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="PELICULAS"
+            android:text="USUARIOS"
             android:textColor="@color/white"
             android:background="#1CE6F7"
             android:layout_weight=".11"
@@ -32,26 +32,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical">
-
         <TextView
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Buscar\nNombre:"
             android:layout_weight="1"
-            android:text="Buscar\nNombre:" />
-
-
+            />
         <EditText
-            android:id="@+id/txtBuscar"
+            android:id="@+id/txtBuscarUsuario"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="" />
-
+            android:layout_weight="15"
+            />
         <Button
-            android:id="@+id/btnAgregar"
+            android:id="@+id/btnAgregarUsuario"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="+"
@@ -60,7 +55,7 @@
 
     </LinearLayout>
     <Button
-        android:id="@+id/btnBuscar"
+        android:id="@+id/btnBuscarUsuario"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="BUSCAR"/>

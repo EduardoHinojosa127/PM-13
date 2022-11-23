@@ -10,14 +10,15 @@ import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import kotlinx.android.synthetic.main.activity_ver_pelicula.*
+import kotlinx.android.synthetic.main.activity_ver_usuario.*
 
-class verPelicula : AppCompatActivity() {
-    fun eliminarPelicula() {
+class verUsuario : AppCompatActivity() {
+    fun eliminarUsuario() {
         AsyncTask.execute {
-            val id = txtId.text.toString()
+            val id = txtIdUsuario.text.toString()
 
             val queue = Volley.newRequestQueue(this)
-            var url = getString(R.string.urlAPI) + "/peliculas/" + id
+            var url = getString(R.string.urlAPI) + "/usuarios/" + id
             val postRequest: StringRequest = object : StringRequest(
                 Request.Method.DELETE, url,
                 Response.Listener { response -> // response
@@ -39,17 +40,16 @@ class verPelicula : AppCompatActivity() {
         }
     }
 
-    fun agregarPelicula() {
+    fun agregarUsuario() {
         AsyncTask.execute {
 
-            val id = txtId.text.toString()
-            val nombre = txtNombre.text.toString()
-            val categoria = cmbCategoria.selectedItem.toString()
-            val duracion = txtDuracion.text.toString()
-            val imagen = txtImagen.text.toString()
+            val id = txtIdUsuario.text.toString()
+            val usuario = txtUsuario.text.toString()
+            val clave = txtClave.text.toString()
+            val estado = txtEstado.text.toString()
 
             val queue = Volley.newRequestQueue(this)
-            var url = getString(R.string.urlAPI) + "/peliculas"
+            var url = getString(R.string.urlAPI) + "/usuarios"
             val postRequest: StringRequest = object : StringRequest(
                 Request.Method.POST, url,
                 Response.Listener { response -> // response
@@ -71,10 +71,9 @@ class verPelicula : AppCompatActivity() {
                     val params: MutableMap<String, String> =
                         HashMap()
                     params["id"] = id
-                    params["nombre"] = nombre
-                    params["categoria"] = categoria
-                    params["duracion"] = duracion
-                    params["imagen"] = imagen
+                    params["usuario"] = usuario
+                    params["clave"] = clave
+                    params["estado"] = estado
                     return params
                 }
             }
@@ -82,17 +81,16 @@ class verPelicula : AppCompatActivity() {
         }
     }
 
-    fun editarPelicula() {
+    fun editarUsuario() {
         AsyncTask.execute {
 
-            val id = txtId.text.toString()
-            val nombre = txtNombre.text.toString()
-            val categoria = cmbCategoria.selectedItem.toString()
-            val duracion = txtDuracion.text.toString()
-            val imagen = txtImagen.text.toString()
+            val id = txtIdUsuario.text.toString()
+            val usuario = txtUsuario.text.toString()
+            val clave = txtClave.text.toString()
+            val estado = txtEstado.text.toString()
 
             val queue = Volley.newRequestQueue(this)
-            var url = getString(R.string.urlAPI) + "/peliculas/"+id
+            var url = getString(R.string.urlAPI) + "/usuarios/"+id
             val postRequest: StringRequest = object : StringRequest(
                 Request.Method.PUT, url,
                 Response.Listener { response -> // response
@@ -114,10 +112,9 @@ class verPelicula : AppCompatActivity() {
                     val params: MutableMap<String, String> =
                         HashMap()
                     params["id"] = id
-                    params["nombre"] = nombre
-                    params["categoria"] = categoria
-                    params["duracion"] = duracion
-                    params["imagen"] = imagen
+                    params["usuario"] = usuario
+                    params["clave"] = clave
+                    params["estado"] = estado
                     return params
                 }
             }
@@ -127,39 +124,27 @@ class verPelicula : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_ver_pelicula)
-        val categorias = arrayOf("Drama", "Comedia", "Anime")
-        cmbCategoria.setAdapter(
-            ArrayAdapter(
-                this,
-                android.R.layout.simple_spinner_item, categorias
-            )
-        )
-        btnGuardar.setOnClickListener(){
-            agregarPelicula()
+        setContentView(R.layout.activity_ver_usuario)
+        btnGuardarUsuario.setOnClickListener(){
+            agregarUsuario()
         }
-        btnEliminar.setOnClickListener(){
-            eliminarPelicula()
+        btnEliminarUsuario.setOnClickListener(){
+            eliminarUsuario()
         }
         val bundle: Bundle?= intent.extras
         if(bundle!=null){
-            txtId.setText(bundle.getString("id").toString())
-            txtNombre.setText(bundle.getString("nombre").toString())
-            when(bundle.getString("categoria").toString()){
-                "Drama"-> cmbCategoria.setSelection(0)
-                "Comedia"-> cmbCategoria.setSelection(1)
-                "Anime"-> cmbCategoria.setSelection(2)
-            }
-            txtDuracion.setText(bundle.getString("duracion").toString())
-            txtImagen.setText(bundle.getString("imagen").toString())
-            btnGuardar.setEnabled(true)
-            btnEliminar.setEnabled(true)
-            btnGuardar.setOnClickListener(){
-                editarPelicula()
+            txtIdUsuario.setText(bundle.getString("idUsuario").toString())
+            txtUsuario.setText(bundle.getString("usuario").toString())
+            txtClave.setText(bundle.getString("clave").toString())
+            txtEstado.setText(bundle.getString("estado").toString())
+            btnGuardarUsuario.setEnabled(true)
+            btnEliminarUsuario.setEnabled(true)
+            btnGuardarUsuario.setOnClickListener(){
+                editarUsuario()
             }
         }else{
-            btnGuardar.setEnabled(true)
-            btnEliminar.setEnabled(false)
+            btnGuardarUsuario.setEnabled(true)
+            btnEliminarUsuario.setEnabled(false)
         }
     }
 }
